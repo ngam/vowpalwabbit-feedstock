@@ -34,10 +34,10 @@ build:
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DVW_INSTALL=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_TESTS=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DCMAKE_INSTALL_PREFIX=${PREFIX}"
-     # - sed -i.bak '/\"clean\"/d' setup.py
+     - sed -i.bak '/\"clean\"/d' setup.py
      - export CMAKE_ARGS_IN=$(echo $CMAKE_ARGS_EXTRA | sed 's/ /;/g')
-     # - {{ PYTHON }} setup.py --cmake-options=$CMAKE_ARGS_IN install
-     - {{ PYTHON }} -m pip install . -vv
+     - {{ PYTHON }} setup.py --cmake-options=$CMAKE_ARGS_IN install
+     # - {{ PYTHON }} -m pip install . -vv
      - make install -j{{ CPU_COUNT }}
      
 requirements:
