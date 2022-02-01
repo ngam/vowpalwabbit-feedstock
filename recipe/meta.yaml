@@ -18,17 +18,16 @@ build:
   script:
      - cp $BUILD_PREFIX/share/gnuconfig/config.* .
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS"
-     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DCMAKE_OSX_ARCHITECTURES=arm64"  # [osx and (build_platform != target_platform)]
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DRAPIDJSON_SYS_DEP=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DFMT_SYS_DEP=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DSPDLOG_SYS_DEP=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_FLATBUFFERS=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DVW_INSTALL=On"
-     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_TESTS=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_TESTS=Off"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DCMAKE_INSTALL_PREFIX=${PREFIX}"
-     - sed -i.bak '/\"--build\"/a\ \ \ \ \ \ \ \ \ \ \ \ \self.spawn(["cmake", "--install", "."])' setup.py
-     - sed -i.bak 's/\"pylibvw\"\]/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\, \"active_interactor\"\]/g' setup.py
-     - sed -i.bak 's/\"pylibvw\"\,/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\, \"active_interactor\"\,/g' setup.py
+     - sed -i.bak '/\"--build\"/a\ \ \ \ \ \ \ \ \ \ \ \ \self.spawn(["make", "install", "-j{}".format(multiprocessing.cpu_count())])' setup.py
+     - sed -i.bak 's/\"pylibvw\"\]/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\]/g' setup.py
+     - sed -i.bak 's/\"pylibvw\"\,/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\,/g' setup.py
      - export CMAKE_ARGS_IN=$(echo $CMAKE_ARGS_EXTRA | sed 's/ /;/g')
      - {{ PYTHON }} setup.py --cmake-options=$CMAKE_ARGS_IN install
      # - {{ PYTHON }} -m pip install . -vv
