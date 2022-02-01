@@ -25,7 +25,7 @@ build:
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DVW_INSTALL=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_TESTS=On"
      - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DCMAKE_INSTALL_PREFIX=${PREFIX}"
-     - sed -i.bak '/\"--build\"/a\ \ \ \ \ \ \ \ \ \ \ \ \self.spawn(["make", "install", "-j{}".format(multiprocessing.cpu_count())])' setup.py
+     - sed -i.bak '/\"--build\"/a\ \ \ \ \ \ \ \ \ \ \ \ \self.spawn(["cmake", "--install", "."])' setup.py
      - sed -i.bak 's/\"pylibvw\"\]/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\]/g' setup.py
      - sed -i.bak 's/\"pylibvw\"\,/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\,/g' setup.py
      - export CMAKE_ARGS_IN=$(echo $CMAKE_ARGS_EXTRA | sed 's/ /;/g')
