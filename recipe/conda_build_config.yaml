@@ -1,7 +1,2 @@
-fmt:
-  - '7'
-spdlog:
-  - '1.8'
-
 channel_targets:
   - conda-forge vowpalwabbit_dev

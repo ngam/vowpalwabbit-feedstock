@@ -11,15 +11,6 @@ source:
     sha256: d109f5326e4490d110abcd1c9126ec5f6e6ddaca14780aaad9864347e90bdccb
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-  - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
-    sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
-    sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
-    folder: ext_libs/spdlog
 build:
   number: 0
   skip: true  # [win]
